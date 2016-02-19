@@ -1,0 +1,29 @@
+Festool-Oberfräse
+
+TRIVIA: 
+Die Oberfräse ist ein nützliches Gerät zur Bearbeitung von Kanten, zum Versäubern und auch zur kreativen Gestaltung (z.b. Einfräsen von Schrift oder Löchern in Plattenmaterial. Sie birgt, korrekt angewendet, nur ein geringes Verletzungsrisiko. Dennoch ist es wichtig, die folgenden Anweisungen genau zu beachten, damit die Oberfräse nicht zu Gesundheitsschäden führt oder beschädigt wird.
+
+Sicherheit:
+
+* Maschine stets an beiden Griffen halten und führen
+* Netzlkabel aus dem Eingriffsbereich des Fräsers halten
+* Werkstück gut festspannen, nie in der Hand halten oder von Dritten halten lassen
+* Werkzeug fest einspannen - dazu Schlüssel aus der Maschinenkiste verwenden
+* immer im Gegenlauf fräsen
+* korrekte Drehzahl für jeweiliges Werkzeug und Werkstück vorwählen -> siehe Tabelle in der Anleitung, Seite 7
+* keine defekten, rissigen, verbogenen oder stumpfen Werkzeuge verwenden
+* vor Werkzeugwechsel Maschine vom Stromnetz trennen, z.B. Stecker ziehen
+* nach fräsen von Alu Maschine gründlichst reiniger und aussaugen
+
+PSA:
+* IMMER Staubsauger verwenden, Steckdose 1, Stellung "Auto", minimum halbe Leistung, besser Vollgas
+* IMMER Gehörschutz aufsetzen
+* Schutzbrille, Handschuhe und Staubmaske nach Tabelle verwenden
+* zu viel PSA schadet nicht, es darf auch immer mit Gehörschutz, Schutzbrille, Staubmaske und Handschuhen gearbeitet werden
+
+PSA-Tabelle
+<siehe Zettel>
+
+Drehzahlen
+<Anleitung Seite 7 -> in tex dokument übernehmen>
+
