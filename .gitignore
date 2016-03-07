@@ -1,7 +1,7 @@
 ## Built file
 output/
 revision.tex
-einweisung_Kreissaege.pdf
+einweisung_Oberfraese.pdf
 
 ##file explorer files
 .directory
@@ -132,3 +132,6 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+# foo
+*.stc*

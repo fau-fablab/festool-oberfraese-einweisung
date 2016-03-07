@@ -3,7 +3,7 @@ Festool-Oberfräse Einweisung
 
 Einweisung des [FAU FabLab](https://fablab.fau.de) in [Festool Oberfräse](https://fablab.fau.de/tool/oberfrase-1010).
 
-Die neueste Version der Einweisung aus [github](https://github.com/fau-fablab/festool-oberfraese-einweisung) ist als PDF unter https://user.fablab.fau.de/~buildserver/festool-oberfraese-einweisung/einweisung_Oberfraese.pdf abrufbar.
+Die neueste Version der Einweisung aus [github](https://github.com/fau-fablab/festool-oberfraese-einweisung) ist als PDF unter https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/einweisung_Oberfraese.pdf abrufbar.
 
 auschecken
 ----------
@@ -14,8 +14,8 @@ git clone --recursive git@github.com:fau-fablab/festool-oberfraese-einweisung.gi
 
 Technische Details zum Buildserver siehe auf macgyver `/home/buildserver/README`
 
-[![Build Status](https://user.fablab.fau.de/~buildserver/festool-oberfraese-einweisung/status.svg)](https://user.fablab.fau.de/~buildserver/festool-oberfraese-einweisung/)
-[![TODOs](https://user.fablab.fau.de/~buildserver/festool-oberfraese-einweisung/status-todos.svg)](https://user.fablab.fau.de/~buildserver/festool-oberfraese-einweisung/)
+[![Build Status](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/status.svg)](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/)
+[![TODOs](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/status-todos.svg)](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/)
 
 Lizenz
 ------
