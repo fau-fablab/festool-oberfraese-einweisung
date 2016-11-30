@@ -9,6 +9,10 @@
 \usepackage{tabularx} % Tabellen mit bestimmtem Breitenverhältnis der Spalten
 \usepackage{wrapfig} % Textumlauf um Bilder
 \usepackage{todonotes}
+\usepackage{framed}
+\usepackage{xargs}
+\usepackage{framed}
+\renewenvironmentx{leftbar}[3][2=0.5pt, 3=5pt]{\def\FrameCommand{\vrule width #2 \hspace{#3}}\MakeFramed {\advance\hsize-\width \FrameRestore}{\tiny#1\\}} {\endMakeFramed}
 
 \renewcommand{\texteuro}{\euro}
 
@@ -111,9 +115,7 @@ Maschine vor dem Anschließen und entfernen des Stromkabels stets ausschalten! D
 \end{itemize}
 
 \subsubsection{Fräser wechseln}
-\todo{LaTeX template für Zitat Blöcke finden / erstellen}
-ANFANG ZITAT Festool, Abschnitt 5.2: 
-
+\begin{leftbar}{Aus Festool OF 1010 EBQ Handbuch, Abschnitt 5.2 (Anmerkungen in Abschnitt~\ref{quellen} beachten)}
 Für den Werkzeugwechsel können Sie die Maschine auf den Kopf stellen.
 \begin{description}
     \item[a)] Werkzeugeinsetzen
@@ -129,12 +131,10 @@ Für den Werkzeugwechsel können Sie die Maschine auf den Kopf stellen.
             \item Entnehmen Sie den Fräser.
         \end{itemize}
 \end{description}
-
-ENDE ZITAT
+\end{leftbar}
 
 \subsection{Frästiefe einstellen}
-ZITAT BEGINN FESTOOL ANLEITUNG 5.4
-
+\begin{leftbar}{Aus Festool OF 1010 EBQ Handbuch, Abschnitt 5.4 (Anmerkungen in Abschnitt~\ref{quellen} beachten)}
 Das Einstellen der Frästiefe erfolgt in drei Schritten:
 \begin{description}
 \item[a)] Nullpunkt einstellen
@@ -162,9 +162,7 @@ Die gewünschte Frästiefe lässt sich entweder mit der Tiefenschnellverstellung
     \item Klemmen Sie die Maschine durch Schließen des Drehknopfs (1.15) in dieser Stellung fest.
 \end{itemize}
 \end{description}
-
-
-ZITAT ENDE
+\end{leftbar}
 
 \subsection{Drehzahl wählen}
 über das Stellrad 1.16 wird die Drehzahl gewählt, diese hängt vom Material des Werkstücks und dem Fräser ab. Siehe Abbildung~\ref{fig:drehzahl} für Hersteller Empfehlungen
@@ -195,13 +193,88 @@ Tipps für gute Ergebnisse bei Holz:
 Weiteres ist in der Anleitung, ab Seite 9, zu finden.
 
 \section{Arbeiten mit Anschlagschiene}
-siehe Anleitung, Seite 9, Abschnitt 6.3 bis 6.5
+\begin{leftbar}{Aus Festool OF 1010 EBQ Handbuch, Abschnitte 6.3 und 6.5 (Anmerkungen in Abschnitt~\ref{quellen} beachten)}
+\textbf{Fräsen mit Seitenanschlag:}
+Für parallel zur Werkstückkante verlaufende
+Arbeiten kann der mitgelieferte Seitenanschlag
+(3.2) eingesetzt werden (bei ``Modul 5A'' nicht im
+Lieferumfang):
 
-\todo{aus anleitung übernehmen und als solches kennzeichnen}
+\begin{itemize}
+    \item Klemmen Sie die beiden Führungsstangen (3.7)
+mit den beiden Drehknöpfen (3.3) am Seitenanschlag
+fest.
+    \item Führen Sie die Führungsstangen bis zum gewünschten
+Maß in die Nuten (1.10) des Frästisches
+ein und klemmen Sie die Führungsstangen
+mit dem Drehknopf (3.1) fest.
+\end{itemize}
+Schneller und genauer lässt sich dieser Abstand
+mit der als Zubehör erhältlichen Feineinstellung
+(3.6) justieren:
+\begin{itemize}
+    \item Drehen Sie die Justierschraube (3.4) in das
+Kunststoffteil des Seitenanschlags,
+    \item klemmen Sie die Führungsstangen mit den
+Drehknöpfen (3.5) an der Feineinstellung fest,
+    \item öffnen Sie die Drehknöpfe (3.3) am Seitenanschlag,
+    \item stellen Sie den gewünschten Abstand mit der
+Justierschraube ein und drehen Sie die Drehköpfe
+wieder zu.
+\end{itemize}
+
+\textbf{Fräsen mit Anschlag, Führungssystem und Zirkel:}
+Das als Zubehör erhältliche Führungssystem
+erleichtert das Fräsen gerader Nuten.
+\begin{itemize}
+    \item Befestigen Sie den Führungsanschlag (4.1) mit
+den Führungsstangen (3.7) des Seitenanschlages
+am Frästisch.
+    \item Befestigen Sie die Führungsschiene (4.3) mit
+Schraubzwingen (4.4) am Werkstück. Achten
+Sie darauf, dass ein Sicherheitsabstand X (Bild
+4) von 5 mm zwischen der Vorderkante der
+Führungsschiene und dem Fräser, bzw. der Nut,
+besteht.
+    \item Setzen Sie den Führungsanschlag, wie in Bild
+4 dargestellt, auf die Führungsschiene. Um ein
+spielfreies Führen des Fräsanschlages sicherzustellen,
+können Sie mit einem Schraubendreher
+durch die beiden seitlichen Öffnungen (4.2)
+zwei Führungsbacken einstellen.
+    \item Schrauben Sie die höhenverstellbare Abstützung
+(4.6) so an der Gewindebohrung (6.6) des
+Frästisches fest, dass die Unterseite des Frästisches
+parallel zur Werkstückoberfl äche ist.
+\end{itemize}
+Um nach Anriss arbeiten zu können, zeigen Ihnen
+die Markierung am Frästisch (4.5) und die Skala
+an der Abstützung (4.6) die Mittelachse des Fräsers
+an.
+
+\textbf{Fräsen mit Stangenzirkel SZ-OF 1000:}
+Mit dem als Zubehör erhältlichen Stangenzirkel
+SZ-OF 1000 können runde Teile und Kreisausschnitte
+mit einem Durchmesser zwischen 153
+und 760 mm hergestellt werden.
+\begin{itemize}
+    \item Schieben Sie den Stangenzirkel so weit in die
+vordere Nut des Frästisches, bis der gewünschte
+Radius eingestellt ist.
+    \item Arretieren Sie den Stangenzirkel mit dem Drehknopf
+(1.12).
+\end{itemize}
+Anwendungstipp:
+Soll die Einkerbung durch die Zirkelspitze auf dem
+Werkstück vermieden werden, kann mit doppelseitigem
+Klebeband ein dünnes Holzbrettchen auf
+dem Mittelpunkt befestigt werden.
+\end{leftbar}
 
 %\newpage
 \section{Quellen und Rechte}
-Alle Rechte an Grafiken, Tabellen und Textabschnitte, welche aus der Festool Originalbetriebsanleitung übernommen wurden lieben bei Festool. Die \glqq Originalbetriebsanleitung\grqq liegt der Maschine bei und ist online auf www.festool.com zu finden. Festool hat dieses Dokument weder gelesen noch auf Vollständigkeit oder Richtigkeit geprüft und übernimmt keine Haftung.
+\label{quellen}
+Alle Rechte an Grafiken, Tabellen und Textabschnitte, welche aus der Festool Originalbetriebsanleitung übernommen wurden liegen bei Festool. Die \glqq Originalbetriebsanleitung\grqq liegt der Maschine bei und ist online auf \url{www.festool.com} zu finden. Festool hat dieses Dokument weder gelesen, noch auf Vollständigkeit oder Richtigkeit geprüft und übernimmt keine Haftung.
 %\begin{itemize}
 %\item Festool \glqq Originalbetriebsanleitung\grqq TS 55 REBQ unter 
 %\url{http://www.etracker.de/lnkcnt.php?et=6hsNGE&url=https\%3a\%2f\%2fassets.festool.com\%2fmedia\%2f706758_002_ts55rebq.zip&lnkname=Bedienungsanleitung+TS+55}
