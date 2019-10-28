@@ -12,6 +12,8 @@
 \usepackage{framed}
 \usepackage{xargs}
 \usepackage{framed}
+\usepackage{multirow}
+
 \renewenvironmentx{leftbar}[3][2=0.5pt, 3=5pt]{\def\FrameCommand{\vrule width #2 \hspace{#3}}\MakeFramed {\advance\hsize-\width \FrameRestore}{\tiny#1\\}} {\endMakeFramed}
 
 \renewcommand{\texteuro}{\euro}
@@ -42,15 +44,15 @@
 %\color{black}
 
 \section{Technische Daten}
-\begin{description}
-    \item[Hersteller] Festool
-    \item[Produktname] Oberfräse OF 1010 EBQ
-    \item[Leistung] $1010\,\mathrm{Watt}$
-    \item[Drezahlbereich] $10.000 - 24.000\,\mathrm{min}^{-1}$
-    \item[Fräserdurchmesser] max. $35\,\mathrm{mm}$
-    \item[Fräserschaftdurchmesser] $8\,\mathrm{mm}$ (Spannzange vorhanden), $6,0$ und $6,35\,\mathrm{mm}$ (Spannzangen nicht vorhanden)
-    
-\end{description}
+\begin{tabular}{r|l}
+Hersteller & Festool \\
+Produktname & Oberfräse OF 1010 EBQ \\
+Leistung & $1010\,\mathrm{Watt}$ \\
+Drezahlbereich & $10.000 - 24.000\,\mathrm{min}^{-1}$ \\
+Fräserdurchmesser & max. $35\,\mathrm{mm}$ \\
+\multirow{2}{*}{Fräserschaftdurchmesser} & $8\,\mathrm{mm}$ (Spannzange vorhanden)\\
+                        & $6,0$ und $6,35\,\mathrm{mm}$ (Spannzangen nicht vorhanden) \\
+\end{tabular}
 
 
 \section[Allgemeine Sicherheitshinweise]{Allgemeine Sicherheitshinweise}
@@ -185,22 +187,13 @@ Tipps zum Festspannen:
     \item Fräsertiefe beachten, z.B. ragen die Abrundfräser meist nicht auf der Unterseite des Werkstücks heraus, was es erlaubt das Werkstück auf der Werkbank Oberfläche zu platzieren.
 \end{itemize}
 
-Immer im Gegenlauf fräsen. Der Fräser dreht bei Draufsicht rechtsherum, wie auch auf der Grundplatte durch einen Pfeil eingezeichnet. Wenn man also die Fräse von rechts an ein Werkstück heranführt, dann muss zum Bediener hin gefräst werden. Wenn man von rechts an ein Werkstück herangeht, dann von einem weg fräsen. Die Fräse wird so immer einen leichten Gegendruck bieten, den man durch drücken bzw. ziehen ausgleichen muss. Sollte man dies nicht beachten wird die Fräse sich unkontrolliert schnell am Werkstück entlang bewegen, was eine Verletzungsgefahr darstellt und zu sehr schlechten Schnittkanten führt. Zum einfräsen in eine Materialoberfläche empfiehlt es sich zirkular in Drehrichtung des Fräsers einzutauchen.
+Immer im Gegenlauf fräsen. Der Fräser dreht bei Draufsicht rechtsherum (siehe Abbildung~\ref{gleichlauf-gegenlauf}), wie auch auf der Grundplatte durch einen Pfeil eingezeichnet. Wenn man also die Fräse von rechts an ein Werkstück heranführt, dann muss zum Bediener hin gefräst werden. Wenn man von rechts an ein Werkstück herangeht, dann von einem weg fräsen. Die Fräse wird so immer einen leichten Gegendruck bieten, den man durch drücken bzw. ziehen ausgleichen muss. Sollte man dies nicht beachten wird die Fräse sich unkontrolliert schnell am Werkstück entlang bewegen, was eine Verletzungsgefahr darstellt und zu sehr schlechten Schnittkanten führt. Zum einfräsen in eine Materialoberfläche empfiehlt es sich zirkular in Drehrichtung des Fräsers einzutauchen.
 
 \begin{figure}[h!]
-\begin{minipage}[t]{0.475\textwidth}
 \centering
-\includegraphics[height=34mm]{bilder/gegenlauf}
-    \caption{Gegenlauffräsen}
-    \label{gegenlauf}
-\end{minipage}
-\hfill
-\begin{minipage}[t]{0.475\textwidth}
-\centering
-\includegraphics[height=34mm]{bilder/gleichlauf}
-    \caption{Gleichlauffräsen}
-    \label{gleichlauf}
-\end{minipage}
+\includegraphics[width=\textwidth]{bilder/gleichlauf-gegenlauf}
+\caption{Gegenlauf- und Gleichlauffräsen}
+\label{gleichlauf-gegenlauf}
 \end{figure}
 
 Tipps für gute Ergebnisse bei Holz:
