@@ -1,23 +1,48 @@
 Festool-Oberfräse Einweisung
 ============================
 
-Einweisung des [FAU FabLab](https://fablab.fau.de) in [Festool Oberfräse](https://fablab.fau.de/tool/oberfrase-1010).
+Einweisung des [FAU FabLab](https://fablab.fau.de) in die Oberfräse Festool OF 1010 EBQ.
 
-Die neueste Version der Einweisung aus [github](https://github.com/fau-fablab/festool-oberfraese-einweisung) ist als PDF unter https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/einweisung_Oberfraese.pdf abrufbar.
+Inhalt
+------
 
-auschecken
-----------
+- Technische Daten, allgemeine Sicherheitshinweise, Schutzausrüstung
+- Bestimmungsgemäße Verwendung, Aluminiumbearbeitung
+- Fräser wechseln, Frästiefe einstellen, Drehzahl wählen
+- Arbeiten mit der Maschine: Festspannen, Gegenlauf, Anschläge und Führungen
+
+Download
+--------
+
+Die neueste Version aus [GitHub](https://github.com/fau-fablab/festool-oberfraese-einweisung) ist als PDF abrufbar:
+
+- [Einweisung](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/einweisung_Oberfraese.pdf)
+- [Einweisungsliste](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/Einweisungsliste_Oberfraese.pdf)
+
+Außerdem baut eine GitHub Action die PDFs bei jedem Push. Auf dem Hauptbranch entsteht dabei ein
+[Release](https://github.com/fau-fablab/festool-oberfraese-einweisung/releases) mit Datums-Version (`vJJJJ.MM.TT`) und den PDFs.
+
+Auschecken und bauen
+--------------------
 
 ```bash
 git clone --recursive git@github.com:fau-fablab/festool-oberfraese-einweisung.git
+cd festool-oberfraese-einweisung
+make
 ```
 
-Technische Details zum Buildserver siehe auf macgyver `/home/buildserver/README`
+Die PDFs landen in `output/`. Layout, Kopf- und Fußzeile und das Logo des FAU FabLab (mit
+FAU-Schriftzug) kommen aus dem Untermodul [fablab-document](https://github.com/fau-fablab/fablab-document),
+das Logo wiederum aus dessen Untermodul [logo](https://github.com/fau-fablab/logo). Bei einem bestehenden
+Klon die Untermodule mit `git submodule update --init --recursive` laden.
+
+Technische Details zum Buildserver: [fau-fablab/buildserver](https://github.com/fau-fablab/buildserver)
 
 [![Build Status](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/status.svg)](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/)
 [![TODOs](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/status-todos.svg)](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/)
+[![PDF bauen](https://github.com/fau-fablab/festool-oberfraese-einweisung/actions/workflows/pdf.yml/badge.svg)](https://github.com/fau-fablab/festool-oberfraese-einweisung/actions/workflows/pdf.yml)
 
 Lizenz
 ------
 
-[![Lizenz: 3.0](https://licensebuttons.net/l/by-sa/3.0/de/88x31.png)</br>CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+**Noch ungeklärt:** Die Einweisung enthält Texte und Abbildungen aus der Betriebsanleitung von Festool, deren Rechte bei Festool liegen.
