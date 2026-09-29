@@ -1,2 +1,2 @@
-TARGET=einweisung_Oberfraese
+TARGET=einweisung_Oberfraese Einweisungsliste_Oberfraese
 include fablab-document/Makefile.include
