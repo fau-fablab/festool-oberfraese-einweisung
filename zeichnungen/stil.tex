@@ -1,0 +1,43 @@
+% =====================================================================
+%  Gemeinsame Farben und Stile der Zeichnungen (TikZ, selbst erstellt)
+%  In der Präambel einbinden: \input{zeichnungen/stil}
+%  Lizenz wie das Dokument: CC BY-SA 3.0
+% =====================================================================
+\usetikzlibrary{calc,arrows.meta}
+
+\definecolor{okgruen}{RGB}{46,160,67}
+\definecolor{nokrot}{RGB}{207,34,46}
+\definecolor{feld}{RGB}{244,246,248}
+\definecolor{holz}{RGB}{226,196,150}
+\definecolor{holzrand}{RGB}{150,110,60}
+\definecolor{nut}{RGB}{186,150,100}
+\definecolor{bediengruen}{RGB}{130,200,60}  % Grün der Bedienelemente
+
+\tikzset{
+  % Bauteile der Maschine
+  gehaeuse/.style={fill=black!12, draw=black!75, line width=0.7pt, line join=round},
+  griff/.style={fill=black!65, draw=black!85, line width=0.7pt, line join=round},
+  metall/.style={fill=black!30, draw=black!75, line width=0.6pt, line join=round},
+  werkstueck/.style={fill=holz, draw=holzrand, line width=0.6pt, line join=round},
+  fraeser/.style={fill=black!55, draw=black!85, line width=0.5pt, line join=round},
+  % Pfeile, Maße, Beschriftung
+  vorschub/.style={-{Stealth[length=2.6mm, width=2.2mm]}, line width=1.3pt},
+  drehung/.style={-{Stealth[length=1.8mm, width=1.6mm]}, line width=0.9pt},
+  mass/.style={{Stealth[length=1.4mm]}-{Stealth[length=1.4mm]}, line width=0.4pt, black!80},
+  hilfslinie/.style={line width=0.3pt, black!60},
+  marke/.style={circle, draw=black, fill=white, line width=0.8pt,
+    minimum size=4.4mm, inner sep=0pt, font=\scriptsize\bfseries},
+  leitung/.style={line width=0.5pt, black!80},
+  % Bewertung: \pic at (x,y) {ok}; bzw. {nok}
+  ok/.pic={\fill[okgruen] (0,0) circle (3);
+    \draw[white, line width=1.3pt, line cap=round, line join=round]
+      (-1.4,0.1) -- (-0.4,-1.1) -- (1.5,1.2);},
+  nok/.pic={\fill[nokrot] (0,0) circle (3);
+    \draw[white, line width=1.3pt, line cap=round]
+      (-1.1,-1.1) -- (1.1,1.1) (-1.1,1.1) -- (1.1,-1.1);},
+}
+
+% Feld mit hellem Hintergrund und Überschrift: \feld{x}{y}{Breite}{Höhe}{Titel}
+\newcommand{\feld}[5]{%
+  \fill[feld, rounded corners=2mm] (#1,#2) rectangle ++(#3,#4);
+  \node[anchor=north west, font=\small\bfseries] at (#1+3,#2+#4-2) {#5};}
