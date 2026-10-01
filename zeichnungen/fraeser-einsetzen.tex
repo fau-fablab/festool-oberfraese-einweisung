@@ -1,0 +1,38 @@
+% =====================================================================
+%  Fräser einsetzen: Schaft weit genug in die Spannzange stecken.
+%  Seitenansicht, verdeckte Teile gestrichelt. Selbst gezeichnet.
+% =====================================================================
+\begin{tikzpicture}[x=1mm, y=1mm, font=\scriptsize]
+
+  % Fräser mit Spindel und Spannmutter, Mitte bei x=#1,
+  % Oberkante des Schafts (in der Spannzange verdeckt) bei y=#2
+  \newcommand{\spannzange}[2]{%
+    \draw[fraeser, fill=black!35] (#1-2.2,#2-21) rectangle (#1+2.2,35);
+    \draw[fraeser] (#1-5,#2-31) rectangle (#1+5,#2-21);
+    \draw[white, line width=0.5pt] (#1-5,#2-28.5) -- (#1+5,#2-24.5)
+      (#1-5,#2-30.5) -- (#1+1,#2-28.2);
+    \draw[metall, fill=black!18] (#1-5,45) rectangle (#1+5,52);
+    \draw[metall] (#1-8,35) rectangle (#1+8,45);
+    \draw[black!60, line width=0.4pt] (#1-3,35) -- (#1-3,45) (#1+3,35) -- (#1+3,45);
+    \draw[black!90, dashed, line width=0.5pt]
+      (#1-2.2,35) -- (#1-2.2,#2) -- (#1+2.2,#2) -- (#1+2.2,35);}
+
+  % ---------------- 1 weit genug eingesteckt ---------------------------
+  \feld{0}{0}{82}{64}{1\quad Weit genug eingesteckt}
+  \spannzange{30}{48}
+  \draw[nokrot, dashed, line width=0.9pt] (27.8,39) -- (32.2,39);
+  \draw[leitung] (27.8,39) -- (19,39) node[anchor=east, align=right] {Markierung\\(verdeckt)};
+  \draw[leitung] (38,40) -- (46,40) node[anchor=west, align=left] {Spannmutter mit\\Spannzange (SW 19)};
+  \draw[leitung] (32.2,31) -- (46,31) node[anchor=west] {Schaft};
+  \draw[leitung] (35,22) -- (46,22) node[anchor=west] {Schneide};
+  \pic at (73,58) {ok};
+  \node at (41,4) {Schaft mindestens bis zur Markierung einstecken};
+
+  % ---------------- 2 zu wenig eingesteckt -----------------------------
+  \feld{88}{0}{82}{64}{2\quad Zu wenig eingesteckt}
+  \spannzange{118}{39}
+  \draw[nokrot, line width=0.9pt] (115.8,30) -- (120.2,30);
+  \draw[leitung] (120.2,30) -- (134,30) node[anchor=west, align=left] {Markierung\\sichtbar};
+  \pic at (161,58) {nok};
+  \node at (129,4) {Der Fräser kann sich lösen und herausfliegen};
+\end{tikzpicture}

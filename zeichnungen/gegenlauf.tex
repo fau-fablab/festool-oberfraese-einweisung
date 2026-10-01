@@ -1,0 +1,71 @@
+% =====================================================================
+%  Gegenlauf und Gleichlauf, Fräsrichtung an Außen- und Innenkanten.
+%  Draufsicht, der Fräser dreht von oben gesehen im Uhrzeigersinn.
+%  Selbst gezeichnet.
+% =====================================================================
+\begin{tikzpicture}[x=1mm, y=1mm, font=\scriptsize]
+
+  % Fräser von oben mit Drehpfeil: \fraeserdraufsicht{x}{y}{Farbe}
+  \newcommand{\fraeserdraufsicht}[3]{%
+    \fill[black!60] (#1,#2) circle (4.5);
+    \fill[black!15] (#1,#2) ++(60:4.5) -- ++(240:2.2) -- ++(330:1.6) -- cycle;
+    \fill[black!15] (#1,#2) ++(240:4.5) -- ++(60:2.2) -- ++(150:1.6) -- cycle;
+    \fill[white] (#1,#2) circle (0.9);
+    \draw[drehung, #3] (#1,#2) ++(165:7.3) arc[start angle=165, end angle=40, radius=7.3];
+    \draw[drehung, #3] (#1,#2) ++(345:7.3) arc[start angle=345, end angle=220, radius=7.3];}
+
+  % ---------------- 1 Gegenlauf ------------------------------------
+  \feld{0}{57}{82}{52}{1\quad Gegenlauf: richtig}
+  \begin{scope}[shift={(0,57)}]
+    \draw[werkstueck] (4,25) -- (41,25) arc[start angle=90, end angle=-19.47, radius=4.5]
+      -- (78,19) -- (78,42) -- (4,42) -- cycle;
+    \fraeserdraufsicht{41}{20.5}{okgruen}
+    \draw[vorschub] (50,11) -- (70,11);
+    \node[anchor=east] at (49,11) {Vorschub};
+    \node at (41,34) {Werkstück};
+    \pic at (73,47) {ok};
+    \node[align=center] at (41,5)
+      {Die Fräse bremst leicht, du schiebst\\gegen einen gleichmäßigen Widerstand};
+  \end{scope}
+
+  % ---------------- 2 Gleichlauf -----------------------------------
+  \feld{88}{57}{82}{52}{2\quad Gleichlauf: verboten}
+  \begin{scope}[shift={(88,57)}]
+    \draw[werkstueck] (78,25) -- (41,25) arc[start angle=90, end angle=199.47, radius=4.5]
+      -- (4,19) -- (4,42) -- (78,42) -- cycle;
+    \fraeserdraufsicht{41}{20.5}{nokrot}
+    \draw[vorschub] (32,11) -- (12,11);
+    \node[anchor=west] at (33,11) {Vorschub};
+    \node at (41,34) {Werkstück};
+    \pic at (73,47) {nok};
+    \node[align=center] at (41,5)
+      {Der Fräser zieht die Fräse von selbst nach vorn,\\sie kann unkontrolliert wegspringen};
+  \end{scope}
+
+  % ---------------- 3 Außenkante -----------------------------------
+  \feld{0}{0}{82}{52}{3\quad Außenkante}
+  \begin{scope}[shift={(0,0)}]
+    \draw[werkstueck] (24,15) rectangle (58,37);
+    \node at (41,26) {Werkstück};
+    \begin{scope}[okgruen, vorschub, line width=1.1pt]
+      \draw (28,10) -- (54,10);
+      \draw (63,19) -- (63,33);
+      \draw (54,42) -- (28,42);
+      \draw (19,33) -- (19,19);
+    \end{scope}
+    \node[align=center] at (41,4) {gegen den Uhrzeigersinn um das Werkstück};
+  \end{scope}
+
+  % ---------------- 4 Innenkante -----------------------------------
+  \feld{88}{0}{82}{52}{4\quad Innenkante (Ausschnitt)}
+  \begin{scope}[shift={(88,0)}]
+    \draw[werkstueck, even odd rule] (12,10) rectangle (70,42) (25,16) rectangle (57,36);
+    \begin{scope}[okgruen, vorschub, line width=1.1pt]
+      \draw (50,20) -- (32,20);
+      \draw (29,23) -- (29,29);
+      \draw (32,32) -- (50,32);
+      \draw (53,29) -- (53,23);
+    \end{scope}
+    \node[align=center] at (41,4) {im Uhrzeigersinn im Ausschnitt};
+  \end{scope}
+\end{tikzpicture}

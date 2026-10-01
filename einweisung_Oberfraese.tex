@@ -1,308 +1,434 @@
+% !TeX spellcheck = de_DE_frami
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COPYRIGHT: (C) 2016-2026 FAU FabLab and others
+% CC-BY-SA 3.0
+% Text in eigenen Worten, KEINE Passagen oder Abbildungen aus der
+% Festool-Betriebsanleitung übernehmen (siehe README, Abschnitt Lizenz).
+% Die Zeichnungen in zeichnungen/ sind selbst mit TikZ erstellt.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \newcommand{\basedir}{fablab-document}
 \documentclass{\basedir/fablab-document}
 
-\usepackage{minitoc} % Inhaltsübersicht je Section
-% \usepackage{fancybox} %ovale Boxen für Knöpfe - nicht mehr benötigt
-\usepackage{amssymb} % Symbole für Knöpfe
-% \usepackage{subfigure,caption}
+\usepackage{amssymb}
 \usepackage{eurosym}
+\usepackage{textcomp}
 \usepackage{tabularx} % Tabellen mit bestimmtem Breitenverhältnis der Spalten
-\usepackage{wrapfig} % Textumlauf um Bilder
-\usepackage{todonotes}
-\usepackage{framed}
-\usepackage{xargs}
-\usepackage{framed}
 \usepackage{multirow}
-
-\renewenvironmentx{leftbar}[3][2=0.5pt, 3=5pt]{\def\FrameCommand{\vrule width #2 \hspace{#3}}\MakeFramed {\advance\hsize-\width \FrameRestore}{\tiny#1\\}} {\endMakeFramed}
+\usepackage{todonotes}
+\usepackage{caption}
+\usepackage{qrcode}
+\usepackage{fablab-document/fablab-ba} % Betriebsanweisung
+\input{zeichnungen/stil} % Farben und Stile der Zeichnungen
 
 \renewcommand{\texteuro}{\euro}
+% Nummer eines Bedienelements wie in der Übersicht, z.B. \teil{3}
+\newcommand{\teil}[1]{\tikz[baseline=(n.base)]\node[marke, minimum size=3.8mm, font=\tiny\bfseries](n){#1};}
+% Farbe eines Bedienelements mit Farbfeld, z.B. \farbe{bediengruen}{grün}
+\newcommand{\farbe}[2]{\tikz[baseline=-0.6ex]\draw[fill=#1, draw=black!60] (0,-1.1mm) rectangle (2.2mm,1.1mm);~#2}
 
-\linespread{1.2}
-
-\date{Februar 2016}
-\author{FAU FabLab} % Siehe github commits für Authoren
+\date{\today}
+% Versionsnummer: version.tex wird von der GitHub Action erzeugt,
+% lokal steht stattdessen "Entwurf" mit Datum in der Fußzeile.
+\InputIfFileExists{version}{}{\newcommand{\Version}{Entwurf \today}}
+\fancyfoot[R]{Version \Version}
+\author{kontakt@fablab.fau.de}
 \title{Einweisung Oberfräse}
 
 \begin{document}
- % Hinweise an Package minitoc, doch bitte irgendwas zu generieren - wird für späteres \secttoc benötigt
-\dosecttoc
-\faketableofcontents
-\mtcsettitle{secttoc}{Arbeitsschritte}
-\mtcsettitlefont{secttoc}{\large \sffamily \bfseries}
-\mtcsetfont{secttoc}{subsection}{\sffamily}
-% \mtcset
-% hier geht das eigentliche Dokument los
 
-%\color{red}
-%\hrule
-%\begin{center}
-%\large{Achtung! Einweisung ist noch in Arbeit!}
-%\vspace{0.1cm}
-%\end{center}
-%\hrule
-%\color{black}
+	\maketitle
+	\begin{center}
+		Für die Oberfräse \textbf{Festool OF 1010 EBQ}\\[1mm]
+		{\small Version \Version}
+	\end{center}
 
-\section{Technische Daten}
-\begin{tabular}{r|l}
-Hersteller & Festool \\
-Produktname & Oberfräse OF 1010 EBQ \\
-Leistung & $1010\,\mathrm{Watt}$ \\
-Drehzahlbereich & $10.000 - 24.000\,\mathrm{min}^{-1}$ \\
-Fräserdurchmesser & max. $35\,\mathrm{mm}$ \\
-\multirow{2}{*}{Fräserschaftdurchmesser} & $8\,\mathrm{mm}$ (Spannzange vorhanden)\\
-                        & $6,0$ und $6,35\,\mathrm{mm}$ (Spannzangen nicht vorhanden) \\
-\end{tabular}
+	\textbf{Nur eingewiesene Benutzer dürfen die Oberfräse selbstständig benutzen.}
+	Wenn du noch nicht eingewiesen bist, frage einen Betreuer. Nach der Einweisung und Unterschrift darfst du die Oberfräse selbstständig verwenden.
 
+	\section{Regeln und Sicherheit}
 
-\section[Allgemeine Sicherheitshinweise]{Allgemeine Sicherheitshinweise}
-\begin{itemize}
-\item {\color{red} Vor dem eigenständigen Gebrauch muss eine Einweisung durch einen Betreuer erfolgt und unterschrieben worden sein. Zum Erlangen der Nutzungsberechtigung muss die sichere und schonende Handhabung der Maschine für Nutzer, Werkzeug und Umgebung gezeigt worden sein.}
-\item Werkstück immer gut festspannen, nie in der Hand oder von Dritten halten lassen
-\item Maschine stets an beiden Griffen (1.17 und 1.15) halten und führen
-\item Immer im Gegenlauf fräsen, entsprechend dem Pfeil auf dem Frästisch (rot markiert, 1.11)
-\item Maschine zuerst einschalten und erst danach ins Werkstück eintauchen
-\item Vor Werkzeugwechsel Maschine vom Stromnetz trennen -- Stecker ziehen
-\item Werkzeug fest einspannen -- dazu Schlüssel aus der Maschinenkiste oder 19mm Maulschlüssel verwenden
-\item Keine defekten, rissigen, verbogenen oder stumpfen Werkzeuge verwenden
-\item Unbedingt mit aktivem Staubsauger fräsen
-\item Netzkabel aus dem Eingriffsbereich des Fräsers halten
-\item Die Gefahr einer unbeabsichtigten Betätigung der Einschaltsperre (1.1) und ``Dauer-Ein''-Stellung beachten und sich damit vertraut machen
-\item Nach dem Fräsen Maschine gründlichst reinigen und aussaugen. Zum Ausblasen mit Druckluft die Maschine aus dem Fenster halten
-\item Im Arbeitsbereich dürfen sich keine Unbeteiligten befinden
-\item Wenn möglich, draußen benutzen, um den Staub, der sich im Lab absetzt, zu reduzieren
-\item Bei Fräsern größer 16mm dürfen nur MAN-Fräser für manuellen Vorschub genutzt werden
-\item Die maximale Drehzahl des Fräsers darf nicht überschritten werden
-\end{itemize}
+	\begin{itemize}
+		\item Das Werkstück ist immer \textbf{fest gespannt}. Nie mit der Hand halten oder von jemand anderem halten lassen.
+		\item Die Fräse wird immer mit \textbf{beiden Händen} an Handgriff und Drehknopf geführt.
+		\item Immer im \textbf{Gegenlauf} fräsen (Abschnitt~\ref{sec:gegenlauf}). Gleichlauf ist verboten.
+		\item Erst einschalten, dann ins Material eintauchen oder an die Kante heranführen.
+		\item Immer mit angeschlossener Absaugung fräsen.
+		\item Gehörschutz tragen, je nach Material zusätzlich Schutzbrille und Staubmaske. Beim Fräsen \textbf{keine Handschuhe}.
+		\item Fräser nur bei \textbf{gezogenem Netzstecker} wechseln und mit dem Schlüssel fest anziehen.
+		\item Keine stumpfen, rissigen, verbogenen oder anders beschädigten Fräser verwenden. Die auf dem Fräser angegebene Höchstdrehzahl nicht überschreiten.
+		\item Netzkabel und Saugschlauch aus dem Fräsbereich fernhalten.
+		\item Nach dem Ausschalten warten, bis der Fräser steht. Erst dann die Fräse absetzen.
+		\item Im Arbeitsbereich dürfen sich keine Unbeteiligten aufhalten.
+		\item Schäden an der Fräse sofort melden: \texttt{fablab-aktive@fablab.fau.de}.
+	\end{itemize}
 
+	Zusätzlich gilt die \textbf{Betriebsanweisung} auf der nächsten Seite (Abschnitt~\ref{sec:betriebsanweisung}). Sie hängt bei der Oberfräse aus und ist Bestandteil dieser Einweisung.
 
-\section{Persönliche Schutzausrüstung}
-\begin{itemize}
-\item Gehörschutz -- hängt an der Fräse, links neben der Werkbank
-\item Schutzbrille, unerlässlich bei Bearbeitung von Alu, Faserwerkstoffen und Gipskarton -- hängen hinter der Werkbank und hinter dem Chemiearbeitsbereich an der Wand
-\item Bei Hartholz ist der Festool Staubsauger mit Staubklasse M oder besser zu nutzen. Staubmasken befinden sich bei Bedarf in Schublade W9
-\item Schutzhandschuhe beim Bearbeiten rauer Materialien und beim Werkzeugwechsel -- liegen in der Schutzausrüstungsschublade W9
-\item Offene lange Haare sind zurückzubinden. Es besteht die Gefahr des Einzugs in rotierende Maschinenelemente.
+	\newpage
 
-\end{itemize}
+	% Betriebsanweisung als ganze Seite im Format des Aushangs
+	\BAseite[sec:betriebsanweisung]{betriebsanweisung/ba_oberfraese}
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.8\textwidth]{bilder/oberfraese-sketch}
-    \caption{Festool Oberfräse OF 1010 EBQ}
-    \label{fig:sketch}
-\end{figure}
+	\renewcommand{\contentsname}{Inhaltsverzeichnis / Arbeitsablauf}
+	\setcounter{tocdepth}{2}
+	\tableofcontents
+	\newpage
 
-\section{Bestimmungsgemäße Verwendung}
-Die Oberfräse ist zur Bearbeitung von Kanten, zum Versäubern und auch zur kreativen Gestaltung (z.\,B. Einfräsen von Schrift oder Löchern in Plattenmaterial) geeignet. Es ist wichtig, die folgenden Anweisungen genau zu beachten, damit die Oberfräse nicht zu Gesundheitsschäden führt oder beschädigt wird.\\
-Es dürfen mit der Maschine Holz, Kunststoff und Aluminium bearbeitet werden, dabei immer auf die richtige Fräserauswahl achten. Bei der Verwendung der Maschine sollte nur der Festool-Staubsauger verwendet werden, da sonst sehr viel Staub und Dreck entsteht. Dabei ist zu beachten, dass die Oberfräse an einer Steckdose des Festool-Saugers angeschlossen wird und der Sauger selbst auf \enquote{AUTO} sowie voller Saugleistung steht. Bei Holz kann sich der Einlass der Absaugung (1.8) an der Oberfräse durch Holzsplitter zusetzen. Bei geringem Absaugeffekt ist die Arbeit zu unterbrechen und die Problemstelle zu finden.\\
-\textbf{WICHTIG: Die Oberfräse darf ausschließlich von eingewiesenen Personen verwendet werden.}
+	\section{Die Oberfräse und ihre Anleitung}
 
+	\begin{center}
+		\begin{tabular}{r|l}
+			Hersteller & Festool \\
+			Produktname & Oberfräse OF 1010 EBQ \\
+			Leistung & $1010\,\mathrm{Watt}$ \\
+			Drehzahlbereich & $10.000 - 24.000\,\mathrm{min}^{-1}$ (Stellrad Stufe 1 bis 6) \\
+			Fräserdurchmesser & max. $35\,\mathrm{mm}$ \\
+			\multirow{2}{*}{Fräserschaft} & $8\,\mathrm{mm}$ (Spannzange vorhanden) \\
+			 & $6$ und $6,35\,\mathrm{mm}$ (Spannzangen nicht vorhanden) \\
+		\end{tabular}
+	\end{center}
 
-\subsection{Aluminiumbearbeitung}
-Bei der Bearbeitung von Aluminium sind aus Sicherheitsgründen folgende besonderen Maßnahmen einzuhalten:
-\begin{itemize}
-\item Maschine nur mit dem Festool-Absaugwagen verwenden, da heiße Späne abgesaugt werden.
-\item Maschine nach der Arbeit von Staubablagerungen im Motorgehäuse reinigen, um langfristig Kurzschlüsse zu vermeiden.
-\item Nur geeignete Fräser verwenden (NICHT die Festool Fräser).
-\item Es entstehen große Kräfte, daher nur kleinere Fräser nutzen.
-\end{itemize}
+	\subsection{Bedienelemente}
+	\label{sec:bedienelemente}
 
+	Die Nummern im Foto werden in der ganzen Einweisung verwendet, z.\,B.\ Drehknopf~\teil{14}.
 
-\section{Inbetriebnahme}
-Maschine vor dem Anschließen und Entfernen des Stromkabels stets ausschalten! Dazu Ein-/Ausschalter (1.2) drücken und kontrollieren, dass die Einschaltsperre (1.1) herausspringt.
+	\begin{center}
+		\input{zeichnungen/foto-bedienelemente}\\[1mm]
+		{\footnotesize Foto: GoRapid, \href{https://commons.wikimedia.org/wiki/File:Oberfraese.jpg}{Wikimedia Commons}, Lizenz \href{https://creativecommons.org/licenses/by/3.0/}{CC BY 3.0}, mit Nummern ergänzt.}
+	\end{center}
 
-\section{Einstellungen}
-\subsection{Funktionen der Maschine}
-\begin{itemize}
-%\item Sanftanlauf: Der elektronisch geregelte Sanftanlauf sorgt für ruckfreien Anlauf des Elektrowerkzeugs.
-%\item Konstante Drehzahl: Die Motordrehzahl wird elektronisch konstant gehalten. Dadurch wird auch bei Belastung eine gleichbleibende Schnittgeschwindigkeit erreicht.
-% Ist das wirklich eine Relevantefunktion, die zu beachten ist. Klar ist das schön, aber darauf achten muss man doch nicht. (jh)
-\item Drehzahlregelung: Die Drehzahl lässt sich mit dem Stellrad (1.16) stufenlos einstellen. Dadurch kann die Schnittgeschwindigkeit der jeweiligen Oberfläche optimal angepasst werden.
-\item Temperatursicherung: Bei zu hoher Motortemperatur werden Stromzufuhr und Drehzahl reduziert. Die Maschine läuft nur noch mit verringerter Leistung, um eine rasche Abkühlung durch die Motorlüftung zu ermöglichen. Wenn die Übertemperatur andauert, schaltet die Maschine nach ca. 40 sec komplett ab. Erst nach Abkühlung des Motors ist ein erneutes Einschalten möglich.
-\item Strombegrenzung: Die Strombegrenzung verhindert bei extremer Überlastung eine zu hohe Stromaufnahme. Dies kann zu einer Verringerung der Motordrehzahl führen. Nach Entlastung läuft der Motor sofort wieder an.
-\item Bremse: Die \textit{OF 1010 EBQ} besitzt eine elektronische Bremse. Nach dem Ausschalten wird der Fräser in ca. 2 Sekunden elektronisch zum Stillstand abgebremst.
-\end{itemize}
+	\textbf{Farben:} Alles, was du beim Arbeiten bedienst oder fein einstellst, ist an der Fräse \textbf{grün}: Ein-/Ausschalter~\teil{4}, Einschaltsperre~\teil{3}, Stellrad für die Drehzahl~\teil{1}, Feineinstellung der Frästiefe~\teil{13} und Spindelstopp~\teil{5}. Griffe und Klemmungen sind dagegen \textbf{schwarz}: Handgriff~\teil{2}, Drehknopf~\teil{14}, Spannhebel des Tiefenanschlags~\teil{12} und die Klemmknöpfe am Frästisch~\teil{8}. Tiefenanschlag~\teil{11} und Revolveranschlag~\teil{10} sind aus blankem Metall. Zum Einstellen der Frästiefe brauchst du also grüne \emph{und} schwarze Teile.
 
-\subsubsection{Fräser wechseln}
-\begin{leftbar}{Aus Festool OF 1010 EBQ Handbuch, Abschnitt 5.2 (Anmerkungen in Abschnitt~\ref{quellen} beachten)}
-Für den Werkzeugwechsel können Sie die Maschine auf den Kopf stellen.
-\begin{description}
-    \item[a)] Werkzeug einsetzen
-        \begin{itemize}
-            \item Stecken Sie das Fräswerkzeug so weit wie möglich, zumindest jedoch bis zur Markierung (\underline{V}) am Fräserschaft, in die geöffnete Spannzange.
-            \item Verdrehen Sie die Spindel so weit, bis der Spindelstopp (1.14) beim Drücken einrastet und die Spindel arretiert.
-            \item Ziehen Sie die Mutter (1.13) mit einem Gabelschlüssel SW 19 fest.
-        \end{itemize}
-    \item[b)] Werkzeug entnehmen
-        \begin{itemize}
-            \item Verdrehen Sie die Spindel so weit, bis der Spindelstopp (1.14) beim Drücken einrastet und die Spindel arretiert.
-            \item Lösen Sie die Mutter (1.13) mit einem Gabelschlüssel SW 19 so weit, bis Sie einen Widerstand spüren. Überwinden Sie diesen Widerstand durch Weiterdrehen des Gabelschlüssels.
-            \item Entnehmen Sie den Fräser.
-        \end{itemize}
-\end{description}
-\end{leftbar}
+	\begin{center}
+		\small
+		\renewcommand{\arraystretch}{1.25}
+		\renewcommand{\tabularxcolumn}[1]{m{#1}}
+		\begin{tabularx}{\textwidth}{|c|m{36mm}|m{16mm}|X|}
+			\hline
+			& \textbf{Bedienelement} & \textbf{Farbe} & \textbf{Bedienung} \\ \hline
+			\teil{1} & Stellrad Drehzahl & \farbe{bediengruen}{grün} & Drehzahl wählen, von Stufe 1 (langsam) bis 6 (schnell), passend zu Fräser und Material (Abschnitt~\ref{sec:drehzahl}). \\ \hline
+			\teil{2} & Handgriff & \farbe{black!80}{schwarz} & Rechte Hand. Die Fräse immer mit beiden Händen führen. \\ \hline
+			\teil{3} & Einschaltsperre & \farbe{bediengruen}{grün} & Stellt den gedrückten Schalter für Dauerbetrieb fest. Ein erneuter Druck auf den Schalter löst sie. \\ \hline
+			\teil{4} & Ein-/Ausschalter & \farbe{bediengruen}{grün} & Drücken: Die Fräse läuft. Loslassen: Sie stoppt und bremst den Fräser ab. \\ \hline
+			\teil{5} & Spindelstopp & \farbe{bediengruen}{grün} & Nur bei stehendem Fräser und gezogenem Netzstecker drücken. Blockiert die Spindel für den Fräserwechsel. \\ \hline
+			\teil{6} & Absauganschluss & \farbe{black!15}{grau} & Saugschlauch fest aufstecken. Lässt die Saugleistung nach, auf Verstopfung prüfen. \\ \hline
+			\teil{7} & Frästisch & \farbe{black!15}{grau} & Liegt flach auf dem Werkstück. Der Pfeil (an unserer Fräse rot markiert) zeigt die Drehrichtung des Fräsers. \\ \hline
+			\teil{8} & Nuten mit Klemmknöpfen & \farbe{black!80}{schwarz} & Führungsstangen von Seitenanschlag, Führungsanschlag oder Zirkel einschieben und mit den Knöpfen festklemmen. \\ \hline
+			\teil{9} & Fräser und Spannmutter & & Fräser nur bei gezogenem Netzstecker wechseln, Spannmutter mit Schlüsselweite 19 (Abschnitt~\ref{sec:fraeserwechsel}). \\ \hline
+			\teil{10} & Revolveranschlag & \farbe{black!35}{Metall} & Drei Festanschläge in verschiedenen Höhen. Weiterdrehen, um tiefe Nuten in mehreren Durchgängen zu fräsen. \\ \hline
+			\teil{11} & Tiefenanschlag mit Skala & \farbe{black!35}{Metall} & Begrenzt das Eintauchen, indem er auf dem Revolveranschlag aufsetzt (Abschnitt~\ref{sec:fraestiefe}). \\ \hline
+			\teil{12} & Spannhebel & \farbe{black!80}{schwarz} & Klemmt den Tiefenanschlag. Zum Verschieben öffnen, danach wieder festziehen. \\ \hline
+			\teil{13} & Feineinstellung & \farbe{bediengruen}{grün} & Frästiefe genau nachstellen: ein Teilstrich 0,1\,mm, eine Umdrehung 1\,mm. \\ \hline
+			\teil{14} & Drehknopf & \farbe{black!80}{schwarz} & Linke Hand. Aufdrehen: Der Motor lässt sich eintauchen. Zudrehen: Die Höhe ist geklemmt. \\ \hline
+		\end{tabularx}
+	\end{center}
 
-\subsection{Frästiefe einstellen}
-\begin{leftbar}{Aus Festool OF 1010 EBQ Handbuch, Abschnitt 5.4 (Anmerkungen in Abschnitt~\ref{quellen} beachten)}
-Das Einstellen der Frästiefe erfolgt in drei Schritten:
-\begin{description}
-\item[a)] Nullpunkt einstellen
-\begin{itemize}
-    \item Öffnen Sie den Spannhebel (1.6), so dass der Tiefenanschlag (1.7) frei beweglich ist.
-    \item Stellen Sie die Oberfräse mit dem Frästisch (1.11) auf eine ebene Unterlage. Öffnen Sie den Drehknopf (1.15) und drücken Sie die Maschine so weit nach unten, bis der Fräser auf der Unterlage aufsitzt.
-    \item Klemmen Sie die Maschine durch Schließen des Drehknopfs (1.15) in dieser Stellung fest.
-    \item Drücken Sie den Tiefenanschlag gegen einen der drei Festanschläge des drehbaren Revolveranschlages (1.9).
-Mit einem Schraubendreher können Sie jeden Festanschlag individuell in seiner Höhe einstellen:
-Festanschlag
-A B C
-min. Höhe/max. Höhe
-38 mm/44 mm 44 mm/54 mm 54 mm/67 mm
-    \item Schieben Sie den Zeiger (1.4) nach unten, so dass er auf der Skala (1.5) 0 mm zeigt.
-\end{itemize}
-\item[b)] Frästiefe vorgeben
-Die gewünschte Frästiefe lässt sich entweder mit der Tiefenschnellverstellung oder mit der Tiefenfeineinstellung vorgeben.
-\begin{description}
-    \item[Tiefen-Schnellverstellung] Ziehen Sie den Tiefenanschlag (1.7) so weit nach oben, bis der Zeiger die gewünschte Frästiefe anzeigt. Klemmen Sie den Tiefenanschlag mit dem Spannhebel (1.6) in dieser Stellung fest.
-     \item[Tiefen-Feineinstellung] Klemmen Sie den Tiefenanschlag mit dem Spannhebel (1.6) fest. Stellen Sie die gewünschte Frästiefe durch Drehen des Stellrades (1.3) ein. Wenn Sie das Stellrad um einen Markierungsstrich verdrehen, ändert sich die Frästiefe um 0,1 mm. Eine vollständige Umdrehung ergibt 1 mm. Der maximale Verstellbereich des Stellrades beträgt 8 mm.
-\end{description}
-\item[c)] Frästiefe zustellen
-\begin{itemize}
-    \item Öffnen Sie den Drehknopf (1.15) und drücken Sie die Maschine so weit nach unten, bis der Tiefenanschlag den Festanschlag berührt.
-    \item Klemmen Sie die Maschine durch Schließen des Drehknopfs (1.15) in dieser Stellung fest.
-\end{itemize}
-\end{description}
-\end{leftbar}
+	\subsection{Anleitung und bestimmungsgemäße Verwendung}
 
-\subsection{Drehzahl wählen}
-Über das Stellrad 1.16 wird die Drehzahl gewählt, diese hängt vom Material des Werkstücks und dem Fräser ab. Siehe Abbildung~\ref{fig:drehzahl} für Herstellerempfehlungen.
-\begin{figure}[h!]
-    \centering
-    \includegraphics{bilder/drehzahltabelle}
-    \caption{Drehzahltabelle}
-    \label{fig:drehzahl}
-\end{figure}
+	Diese Einweisung fasst die Regeln des FabLabs zusammen und erklärt die Bedienung in eigenen Worten. Sie ersetzt nicht die Betriebsanleitung des Herstellers: Die \textbf{Originalbetriebsanleitung} liegt der Maschine bei. Was hier nicht beschrieben ist (weiteres Zubehör, Ersatzteile, Einstellen der Festanschläge), steht dort.
 
-\section{Arbeiten mit der Maschine}
-Beim Arbeiten mit der Maschine ist das Werkstück stets festzuspannen und gegen Verrutschen zu sichern. Die Maschine muss mit beiden Händen gehalten werden. Bei Arbeiten, die gefährliche Stäube erzeugen, ist der Staubsauger auf ``Vollgas'' einzustellen. Hierzu zählt auch Hartholz!
+	\begin{center}
+		\begin{tabular}{cc}
+			\qrcode[height=2.2cm]{https://www.festool.de/bedienungsanleitungen} &
+			\qrcode[height=2.2cm]{https://www.festool.de/produkte/fraesen/oberfraesen} \\[1mm]
+			\href{https://www.festool.de/bedienungsanleitungen}{Bedienungsanleitungen} &
+			\href{https://www.festool.de/produkte/fraesen/oberfraesen}{Oberfräsen bei Festool}
+		\end{tabular}
+	\end{center}
 
-Tipps zum Festspannen:
-\begin{itemize}
-    \item Sehr kleine Stücke, bei denen Schraubzwingen das Arbeiten mit der Fräse behindern, im Schraubstock so einspannen, dass das Werkstück knapp über die Backen hinausragt. Dabei ist darauf zu achten, dass der Fräser keinesfalls die Backen berührt.
-    \item Fräsertiefe beachten, z.B. ragen die Abrundfräser meist nicht auf der Unterseite des Werkstücks heraus, was es erlaubt, das Werkstück auf der Werkbankoberfläche zu platzieren.
-\end{itemize}
+	Mit der Oberfräse werden Kanten profiliert, abgerundet, gefast und bündig gefräst, außerdem Nuten, Falze, Ausschnitte, Vertiefungen und Schriften in Plattenmaterial gefräst. Bearbeitet werden Holz, Holzwerkstoffe und Kunststoffe, mit geeigneten Fräsern auch Aluminium (Abschnitt~\ref{sec:aluminium}). Diese Einweisung gilt für die \textbf{handgeführte} Fräse, auch mit Seitenanschlag, Führungsschiene und Stangenzirkel.
 
-Immer im Gegenlauf fräsen. Der Fräser dreht bei Draufsicht rechtsherum (siehe Abbildung~\ref{gleichlauf-gegenlauf}), wie auch auf der Grundplatte durch einen Pfeil eingezeichnet. Wenn man also die Fräse von rechts an ein Werkstück heranführt, dann muss zum Bediener hin gefräst werden. Wenn man von rechts an ein Werkstück herangeht, dann von einem weg fräsen. Die Fräse wird so immer einen leichten Gegendruck bieten, den man durch Drücken bzw. Ziehen ausgleichen muss. Sollte man dies nicht beachten, wird die Fräse sich unkontrolliert schnell am Werkstück entlangbewegen, was eine Verletzungsgefahr darstellt und zu sehr schlechten Schnittkanten führt. Zum Einfräsen in eine Materialoberfläche empfiehlt es sich, zirkular in Drehrichtung des Fräsers einzutauchen.
+	\section{Vorbereitung}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\textwidth]{bilder/gleichlauf-gegenlauf}
-\caption{Gegenlauf- und Gleichlauffräsen}
-\label{gleichlauf-gegenlauf}
-\end{figure}
+	\subsection{Checkliste vor dem Fräsen}
+	Vor \textbf{jedem} Einsatz durchgehen:
+	\begin{itemize}
+		\item Fräse, Netzkabel und Saugschlauch unbeschädigt?
+		\item Fräser scharf, unbeschädigt, für das Material geeignet und fest eingespannt? Passt seine Höchstdrehzahl zur gewählten Stufe?
+		\item Schutzausrüstung angelegt (siehe unten)?
+		\item Absaugung angeschlossen, Sauger auf \enquote{AUTO}?
+		\item Werkstück fest gespannt? Zwingen außerhalb des Fräswegs? Keine Nägel, Schrauben oder Klammern im Fräsbereich?
+		\item Frästiefe und Drehzahl eingestellt, Spannhebel und Drehknöpfe fest?
+		\item Netzkabel und Schlauch liegen so, dass der Fräser sie nicht erreichen kann?
+		\item Ein-/Ausschalter nicht arretiert, bevor der Netzstecker eingesteckt wird?
+		\item Arbeitsbereich frei, keine Unbeteiligten in der Nähe?
+	\end{itemize}
 
-Tipps für gute Ergebnisse bei Holz:
-\begin{itemize}
-    \item Rechtwinklig zur Faserstruktur Vorschub leisten. Dies verhindert das Splittern des Holzes entlang der Maserung.
-    \item Für den Außengebrauch steht ein Festool-Arbeitstisch zum Ausklappen bereit. Wende dich dafür an einen Betreuer.
-    \item Die Tiefeneinstellungsskala an der Maschine ist bei Fräsern mit Anschlagring nicht gültig. 
-\end{itemize}
+	\subsection{Schutzausrüstung}
+	\begin{itemize}
+		\item Gehörschutz: immer. Hängt an der Fräse links neben der Werkbank.
+		\item Schutzbrille: bei Aluminium, Faserwerkstoffen und Gipskarton unbedingt, sonst empfohlen. Hängt hinter der Werkbank und hinter dem Chemiearbeitsbereich an der Wand.
+		\item Staubmaske bei stauberzeugenden Arbeiten, insbesondere bei Hartholz. Liegt in Schublade W9.
+		\item Beim Fräsen \textbf{keine Handschuhe} tragen: Der rotierende Fräser kann sie erfassen und die Hand mitziehen. Schutzhandschuhe nur, wenn die Fräse steht: beim Fräserwechsel mit gezogenem Netzstecker und beim Tragen von rauem Material. Liegen in Schublade W9.
+		\item Eng anliegende Kleidung ohne Fransen, Schals oder Kordeln, keinen Schmuck. Lange Haare zusammenbinden: Sie können vom Fräser erfasst und eingezogen werden.
+	\end{itemize}
+	Gehörschutz, Schutzbrille und Staubmaske dürfen auch immer zusammen getragen werden, mehr davon schadet nie. Handschuhe gehören beim Fräsen aber nicht dazu.
 
-Weiteres ist in der Anleitung, ab Seite 9, zu finden.
+	\subsection{Material}
+	\begin{itemize}
+		\item Zugelassen: Holz und Holzwerkstoffe (auch beschichtet), Kunststoffe und Gipskarton. Aluminium nur wie in Abschnitt~\ref{sec:aluminium} beschrieben.
+		\item Nicht zugelassen: Stahl und andere Metalle außer Aluminium, Stein, Glas sowie Material mit Nägeln, Schrauben oder Klammern im Fräsbereich.
+		\item Hartholzstaub ist gesundheitsschädlich. Bei Hartholz nur mit dem Sauger der Staubklasse M (oder besser) arbeiten und, wenn möglich, im Freien fräsen.
+	\end{itemize}
 
-\section{Arbeiten mit Anschlag und Führung}
-\begin{figure}[h!]
-    \centering
-    \includegraphics{bilder/fuehrung-sketch}
-    \caption{Verwendung von Anschlägen und Führungen}
-    \label{fig:drehzahl}
-\end{figure}
+	\subsection{Absaugung}
+	Immer mit dem Festool-Sauger fräsen. Den Netzstecker der Fräse in die Steckdose am Sauger stecken und den Sauger auf \enquote{AUTO} stellen: Er startet dann mit der Fräse und läuft nach dem Ausschalten kurz nach. Die Saugleistung auf das Maximum stellen.
 
-\begin{leftbar}{Aus Festool OF 1010 EBQ Handbuch, Abschnitte 6.3 und 6.5 (Anmerkungen in Abschnitt~\ref{quellen} beachten)}
-\textbf{Fräsen mit Seitenanschlag:}
-Für parallel zur Werkstückkante verlaufende
-Arbeiten kann der mitgelieferte Seitenanschlag
-(3.2) eingesetzt werden (bei ``Modul 5A'' nicht im
-Lieferumfang):
+	Holzsplitter können den Absauganschluss~\teil{6} verstopfen. Lässt die Absaugung nach, die Arbeit unterbrechen, den Netzstecker ziehen und die verstopfte Stelle suchen.
 
-\begin{itemize}
-    \item Klemmen Sie die beiden Führungsstangen (3.7)
-mit den beiden Drehknöpfen (3.3) am Seitenanschlag
-fest.
-    \item Führen Sie die Führungsstangen bis zum gewünschten
-Maß in die Nuten (1.10) des Frästisches
-ein und klemmen Sie die Führungsstangen
-mit dem Drehknopf (3.1) fest.
-\end{itemize}
-Schneller und genauer lässt sich dieser Abstand
-mit der als Zubehör erhältlichen Feineinstellung
-(3.6) justieren:
-\begin{itemize}
-    \item Drehen Sie die Justierschraube (3.4) in das
-Kunststoffteil des Seitenanschlags,
-    \item klemmen Sie die Führungsstangen mit den
-Drehknöpfen (3.5) an der Feineinstellung fest,
-    \item öffnen Sie die Drehknöpfe (3.3) am Seitenanschlag,
-    \item stellen Sie den gewünschten Abstand mit der
-Justierschraube ein und drehen Sie die Drehknöpfe
-wieder zu.
-\end{itemize}
+	Wenn möglich draußen fräsen, damit sich weniger Staub im FabLab absetzt. Für draußen gibt es einen klappbaren Festool-Arbeitstisch, frag einen Betreuer.
 
-\textbf{Fräsen mit Anschlag, Führungssystem und Zirkel:}
-Das als Zubehör erhältliche Führungssystem
-erleichtert das Fräsen gerader Nuten.
-\begin{itemize}
-    \item Befestigen Sie den Führungsanschlag (4.1) mit
-den Führungsstangen (3.7) des Seitenanschlages
-am Frästisch.
-    \item Befestigen Sie die Führungsschiene (4.3) mit
-Schraubzwingen (4.4) am Werkstück. Achten
-Sie darauf, dass ein Sicherheitsabstand X (Bild
-4) von 5 mm zwischen der Vorderkante der
-Führungsschiene und dem Fräser, bzw. der Nut,
-besteht.
-    \item Setzen Sie den Führungsanschlag, wie in Bild
-4 dargestellt, auf die Führungsschiene. Um ein
-spielfreies Führen des Fräsanschlages sicherzustellen,
-können Sie mit einem Schraubendreher
-durch die beiden seitlichen Öffnungen (4.2)
-zwei Führungsbacken einstellen.
-    \item Schrauben Sie die höhenverstellbare Abstützung
-(4.6) so an der Gewindebohrung (6.6) des
-Frästisches fest, dass die Unterseite des Frästisches
-parallel zur Werkstückoberfläche ist.
-\end{itemize}
-Um nach Anriss arbeiten zu können, zeigen Ihnen
-die Markierung am Frästisch (4.5) und die Skala
-an der Abstützung (4.6) die Mittelachse des Fräsers
-an.
+	\subsection{Werkstück spannen}
+	\begin{itemize}
+		\item Das Werkstück mit Zwingen auf der Werkbank spannen. Die Zwingen so setzen, dass weder die Fräse noch der Anschlag dagegenstoßen.
+		\item Sehr kleine Teile, bei denen Zwingen im Weg wären, im Schraubstock spannen. Das Werkstück ragt knapp über die Backen hinaus, der Fräser darf die Backen nicht berühren.
+		\item Auf die Tiefe des Fräsers achten: Ragt er unten nicht aus dem Werkstück heraus (z.\,B.\ ein Abrundfräser an der Oberkante), darf das Werkstück direkt auf der Werkbank liegen. Sonst ein Reststück unterlegen oder das Werkstück überstehen lassen, damit die Werkbank nicht angefräst wird.
+		\item Der Frästisch~\teil{7} braucht genug Auflage. Liegt beim Kantenfräsen weniger als die Hälfte auf, kann die Fräse kippen. Dann ein gleich dickes Reststück daneben spannen.
+	\end{itemize}
 
-\textbf{Fräsen mit Stangenzirkel SZ-OF 1000:}
-Mit dem als Zubehör erhältlichen Stangenzirkel
-SZ-OF 1000 können runde Teile und Kreisausschnitte
-mit einem Durchmesser zwischen 153
-und 760 mm hergestellt werden.
-\begin{itemize}
-    \item Schieben Sie den Stangenzirkel so weit in die
-vordere Nut des Frästisches, bis der gewünschte
-Radius eingestellt ist.
-    \item Arretieren Sie den Stangenzirkel mit dem Drehknopf
-(1.12).
-\end{itemize}
-Anwendungstipp:
-Soll die Einkerbung durch die Zirkelspitze auf dem
-Werkstück vermieden werden, kann mit doppelseitigem
-Klebeband ein dünnes Holzbrettchen auf
-dem Mittelpunkt befestigt werden.
-\end{leftbar}
+	\section{Einstellungen}
 
-%\newpage
-\section{Quellen und Rechte}
-\label{quellen}
-Alle Rechte an Grafiken, Tabellen und Textabschnitten, welche aus der Festool-Originalbetriebsanleitung übernommen wurden, liegen bei Festool. Die \glqq Originalbetriebsanleitung\grqq{} liegt der Maschine bei und ist online auf \url{www.festool.com} zu finden. Festool hat dieses Dokument weder gelesen noch auf Vollständigkeit oder Richtigkeit geprüft und übernimmt keine Haftung.
-%\begin{itemize}
-%\item Festool \glqq Originalbetriebsanleitung\grqq TS 55 REBQ unter 
-%\url{http://www.etracker.de/lnkcnt.php?et=6hsNGE&url=https\%3a\%2f\%2fassets.festool.com\%2fmedia\%2f706758_002_ts55rebq.zip&lnkname=Bedienungsanleitung+TS+55}
-%\end{itemize}
+	\subsection{Funktionen der Maschine}
+	\begin{itemize}
+		\item Drehzahlregelung: Am Stellrad~\teil{1} wird die Drehzahl in sechs Stufen eingestellt, von etwa 10.000 (Stufe 1) bis 24.000 Umdrehungen pro Minute (Stufe 6). Welche Stufe passt, steht in Abschnitt~\ref{sec:drehzahl}.
+		\item Sanftanlauf und konstante Drehzahl: Die Fräse läuft ruckfrei an, die Elektronik hält die Drehzahl auch unter Last.
+		\item Temperatursicherung: Wird der Motor zu heiß, läuft die Fräse mit weniger Leistung weiter, damit der Lüfter sie kühlt. Bleibt sie zu heiß, schaltet sie kurz darauf ab und lässt sich erst nach dem Abkühlen wieder einschalten.
+		\item Strombegrenzung: Bei starker Überlastung begrenzt die Elektronik den Strom, die Drehzahl sinkt. Wird die Fräse entlastet, läuft sie wieder normal.
+		\item Bremse: Nach dem Ausschalten bremst die Elektronik den Fräser ab, nach etwa zwei Sekunden steht er.
+	\end{itemize}
+	Läuft die Fräse ohne Sanftanlauf an oder lässt sich die Drehzahl nicht regeln, ist die Elektronik defekt. Dann können zu hohe Drehzahlen auftreten: nicht weiterarbeiten und einem Betreuer melden.
+
+	\subsection{Fräser wechseln}
+	\label{sec:fraeserwechsel}
+	Fräser nur bei \textbf{gezogenem Netzstecker} wechseln. Dabei Schutzhandschuhe tragen: Fräser sind scharf und nach dem Fräsen heiß. Vor dem Einschalten die Handschuhe wieder ausziehen. Zum Wechseln die Fräse am besten auf den Kopf stellen.
+
+	\textbf{Fräser einsetzen:}
+	\begin{enumerate}
+		\item Netzstecker ziehen.
+		\item Den Schaft des Fräsers so weit wie möglich in die offene Spannzange stecken, mindestens bis zur Markierung am Schaft.
+		\item Spindelstopp~\teil{5} drücken und dabei die Spindel von Hand drehen, bis er einrastet. Die Spindel ist jetzt blockiert.
+		\item Spannmutter~\teil{9} mit dem Gabelschlüssel (Schlüsselweite 19, liegt in der Maschinenkiste) fest anziehen. Spindelstopp loslassen.
+	\end{enumerate}
+
+	\textbf{Fräser herausnehmen:}
+	\begin{enumerate}
+		\item Netzstecker ziehen, Spindelstopp~\teil{5} drücken und einrasten lassen.
+		\item Spannmutter~\teil{9} mit dem Schlüssel lösen. Nach einer kurzen Strecke wird sie wieder schwergängig: weiterdrehen. Dabei drückt die Mutter die Spannzange aus ihrem Sitz und gibt den Fräser frei.
+		\item Fräser herausziehen.
+	\end{enumerate}
+
+	\begin{center}
+		\input{zeichnungen/fraeser-einsetzen}
+	\end{center}
+
+	\begin{itemize}
+		\item Die Spannmutter nie ohne eingesteckten Fräser festziehen, das beschädigt die Spannzange.
+		\item Es passen nur Fräser mit $8\,\mathrm{mm}$ Schaft, andere Spannzangen sind nicht vorhanden. Der Fräser darf höchstens $35\,\mathrm{mm}$ Durchmesser haben.
+		\item Fräser mit mehr als $16\,\mathrm{mm}$ Durchmesser nur verwenden, wenn sie mit \textbf{MAN} gekennzeichnet sind (für Handvorschub zugelassen).
+	\end{itemize}
+
+	\subsection{Frästiefe einstellen}
+	\label{sec:fraestiefe}
+	Beim Eintauchen gleitet der Motor auf den Führungssäulen nach unten, bis der Tiefenanschlag~\teil{11} auf dem Revolveranschlag~\teil{10} aufsitzt. Eingestellt wird der Abstand zwischen beiden: Genau so tief taucht der Fräser ins Material ein.
+
+	\begin{center}
+		\input{zeichnungen/fraestiefe}
+	\end{center}
+
+	\begin{enumerate}
+		\item \textbf{Nullpunkt:} Spannhebel~\teil{12} öffnen, damit sich der Tiefenanschlag frei bewegen lässt. Die Fräse auf das Werkstück oder eine ebene Fläche stellen. Drehknopf~\teil{14} aufdrehen, den Motor herunterdrücken, bis der Fräser die Oberfläche berührt, und den Drehknopf wieder zudrehen. Tiefenanschlag auf den Revolveranschlag absenken und den Zeiger an der Skala auf 0 schieben.
+		\item \textbf{Frästiefe vorgeben:} Entweder schnell: Tiefenanschlag hochziehen, bis der Zeiger die gewünschte Tiefe anzeigt, und mit dem Spannhebel~\teil{12} festklemmen. Oder genau: Spannhebel festklemmen und am Stellrad~\teil{13} drehen. Ein Teilstrich entspricht 0,1\,mm, eine ganze Umdrehung 1\,mm, insgesamt lassen sich so bis zu 8\,mm verstellen. Danach den Drehknopf öffnen, der Motor fährt wieder nach oben.
+		\item \textbf{Eintauchen:} Beim Fräsen die Fräse einschalten, den Drehknopf~\teil{14} öffnen und den Motor gleichmäßig nach unten drücken, bis der Tiefenanschlag aufsitzt. In dieser Höhe mit dem Drehknopf klemmen.
+	\end{enumerate}
+
+	Tipps:
+	\begin{itemize}
+		\item Tiefe Nuten nicht in einem Durchgang fräsen. Pro Durchgang höchstens etwa so tief wie der Fräserdurchmesser, bei Hartholz weniger. Dazu den Nullpunkt an der niedrigsten Stufe des Revolveranschlags~\teil{10} einstellen: Die beiden höheren Stufen ergeben weniger Frästiefe. Erst auf der höchsten Stufe fräsen, dann den Revolveranschlag Stufe für Stufe weiterdrehen.
+		\item Die Frästiefe an einem Reststück ausprobieren und nachmessen.
+		\item Bei Fräsern mit Anlaufring sitzt ein Kugellager unter der Schneide. Die Skala zeigt dann nicht die Tiefe des Profils an. Die richtige Einstellung an einem Reststück ermitteln.
+	\end{itemize}
+
+	\subsection{Drehzahl wählen}
+	\label{sec:drehzahl}
+	Die passende Stufe am Stellrad~\teil{1} hängt vom Material und vom Durchmesser des Fräsers ab. Als Faustregel gilt: Je größer der Fräser, desto niedriger die Stufe. Kunststoff und Aluminium werden langsamer gefräst als Holz.
+
+	\begin{itemize}
+		\item Drehzahl zu hoch: Brandspuren, Kunststoff schmilzt, der Fräser überhitzt und wird schnell stumpf.
+		\item Drehzahl zu niedrig: ausgefranste Kanten, die Fräse rattert.
+		\item Nie höher als die auf dem Fräser angegebene Höchstdrehzahl.
+	\end{itemize}
+
+	\begin{center}
+		\small
+		\renewcommand{\arraystretch}{1.3}
+		\begin{tabularx}{\textwidth}{|X|c|c|c|l|}
+			\hline
+			& \multicolumn{3}{c|}{\textbf{Stufe bei Fräserdurchmesser}} & \\
+			\textbf{Material} & \textbf{3--14\,mm} & \textbf{15--25\,mm} & \textbf{26--35\,mm} & \textbf{Schneide} \\ \hline
+			Hartholz & 4--6 & 3--5 & 1--3 & HW (HSS) \\ \hline
+			Weichholz & 5--6 & 3--6 & 1--4 & HSS (HW) \\ \hline
+			Spanplatte, beschichtet & 5--6 & 3--6 & 2--4 & HW \\ \hline
+			Kunststoff & 4--6 & 3--5 & 1--2 & HW \\ \hline
+			Aluminium & 1--3 & 1--2 & 1 & HSS (HW) \\ \hline
+			Gipskarton & 1--2 & 1 & 1 & HW \\ \hline
+		\end{tabularx}
+	\end{center}
+
+	{\footnotesize Richtwerte nach Angaben des Herstellers. HW = Hartmetall, HSS = Schnellarbeitsstahl, in Klammern: ebenfalls geeignet. Im Zweifel mit der niedrigeren Stufe anfangen.}
+
+	\section{Fräsen}
+
+	\subsection{Ein Fräsvorgang Schritt für Schritt}
+	\begin{enumerate}
+		\item Checkliste vor dem Fräsen durchgehen.
+		\item Werkstück spannen.
+		\item Fräser einsetzen, Frästiefe und Drehzahl einstellen, bei Bedarf Anschlag oder Führung anbauen.
+		\item Absaugung anschließen, Sauger auf \enquote{AUTO}, Schutzausrüstung anlegen.
+		\item Prüfen, dass der Schalter nicht arretiert ist, dann den Netzstecker einstecken.
+		\item Fräse mit dem Frästisch auf das Werkstück setzen. Der Fräser berührt das Werkstück noch nicht. Beide Hände an die Griffe.
+		\item Einschalten und warten, bis die volle Drehzahl erreicht ist.
+		\item Eintauchen bis zum Tiefenanschlag und klemmen. Bei Kanten die laufende Fräse von der Seite an die Kante heranführen.
+		\item Gleichmäßig im Gegenlauf fräsen und den Frästisch dabei flach auf dem Werkstück halten.
+		\item Am Ende den Drehknopf öffnen und den Motor nach oben gleiten lassen. Ausschalten und warten, bis der Fräser steht.
+		\item Netzstecker ziehen, Werkstück lösen, Fräse und Arbeitsplatz absaugen.
+	\end{enumerate}
+
+	\subsection{Einschalten und Ausschalten}
+	\begin{itemize}
+		\item Vor dem Einstecken und vor dem Ausstecken des Netzsteckers ist die Fräse immer ausgeschaltet.
+		\item Der Ein-/Ausschalter~\teil{4} ist ein Taster: Die Fräse läuft, solange er gedrückt ist, und stoppt beim Loslassen.
+		\item Mit der Einschaltsperre~\teil{3} lässt sich der gedrückte Schalter für Dauerbetrieb feststellen. Ein erneuter Druck auf den Schalter löst die Arretierung, die Einschaltsperre springt dabei heraus.
+		\item Vorsicht bei Dauerbetrieb: Die Fräse läuft weiter, auch wenn du den Griff loslässt. Darauf achten, dass die Einschaltsperre nicht aus Versehen einrastet. Ist der Schalter beim Einstecken arretiert, läuft die Fräse sofort los.
+	\end{itemize}
+
+	\subsection{Gegenlauf}
+	\label{sec:gegenlauf}
+	Der Fräser dreht sich, von oben gesehen, \textbf{im Uhrzeigersinn}. Der rote Pfeil auf dem Frästisch~\teil{7} zeigt diese Drehrichtung. Daraus ergibt sich, in welche Richtung gefräst wird:
+	\begin{itemize}
+		\item \textbf{Gegenlauf (richtig):} Der Fräser drückt die Fräse leicht zurück. Du schiebst gegen einen gleichmäßigen Widerstand und hast die Fräse unter Kontrolle.
+		\item \textbf{Gleichlauf (verboten):} Der Fräser zieht die Fräse in Vorschubrichtung. Sie wird unkontrolliert schnell, kann wegspringen und hinterlässt eine schlechte Kante. Das ist gefährlich.
+	\end{itemize}
+
+	\begin{center}
+		\input{zeichnungen/gegenlauf}
+	\end{center}
+
+	Merkregeln (Draufsicht, du stehst vor dem Werkstück):
+	\begin{itemize}
+		\item \textbf{Außenkanten} gegen den Uhrzeigersinn um das Werkstück fräsen. An der dir zugewandten Kante heißt das: von links nach rechts. An der rechten Kante von dir weg, an der linken Kante zu dir hin.
+		\item \textbf{Innenkanten} (Ausschnitte) im Uhrzeigersinn fräsen.
+		\item Beim Eintauchen in eine Fläche die Fräse beim Absenken langsam auf einer kleinen Kreisbahn in Drehrichtung des Fräsers bewegen.
+	\end{itemize}
+
+	\subsection{Regeln beim Fräsen}
+	\begin{itemize}
+		\item Den Frästisch immer flach auf dem Werkstück halten und nicht kippen.
+		\item Gleichmäßig schieben. Zu schnell: Die Fräse wird langsamer und rattert. Zu langsam: Brandspuren am Holz, geschmolzener Kunststoff.
+		\item Lieber mehrere flache Durchgänge als einen tiefen.
+		\item Nie in den Fräsbereich oder unter das Werkstück greifen.
+		\item Klemmt der Fräser oder wird die Fräse schwergängig: ausschalten, warten, bis der Fräser steht, erst dann aus dem Material nehmen.
+		\item Bei Pausen und vor jedem Umbau den Netzstecker ziehen.
+		\item Holz: Sollen alle vier Kanten gefräst werden, zuerst die Hirnholzkanten (quer zur Faser) fräsen, danach die Längskanten. Ausrisse an den Ecken werden beim zweiten Durchgang wieder weggefräst.
+	\end{itemize}
+
+	\subsection{Aluminium}
+	\label{sec:aluminium}
+	Beim Fräsen von Aluminium entstehen große Kräfte und heiße Späne. Deshalb gilt zusätzlich:
+	\begin{itemize}
+		\item Nur Fräser verwenden, die für Aluminium geeignet sind. Die Festool-Fräser des FabLabs sind dafür \textbf{nicht} geeignet.
+		\item Nur kleine Fräser und geringe Frästiefe pro Durchgang, niedrige Drehzahl (Tabelle in Abschnitt~\ref{sec:drehzahl}).
+		\item Schutzbrille tragen.
+		\item Nur mit dem Festool-Absaugmobil absaugen, nicht mit anderen Staubsaugern: Die Späne sind heiß.
+		\item Nach der Arbeit das Motorgehäuse gründlich von Spänen befreien. Aluminiumstaub im Motor kann einen Kurzschluss verursachen.
+	\end{itemize}
+
+	\subsection{Nicht erlaubt}
+	Folgendes ist im FabLab \textbf{verboten}:
+	\begin{itemize}
+		\item Benutzen der Fräse durch nicht eingewiesene Personen.
+		\item Fräsen im Gleichlauf.
+		\item Führen der Fräse mit nur einer Hand.
+		\item Fräsen mit Handschuhen.
+		\item Fräsen ohne angeschlossene Absaugung.
+		\item Fräsen von ungespannten oder nur mit der Hand gehaltenen Werkstücken sowie von sehr kleinen Teilen, die sich nicht sicher spannen lassen.
+		\item Fräsen von Stahl, Stein, Glas und anderen nicht zugelassenen Materialien sowie von Material mit Nägeln, Schrauben oder Klammern im Fräsbereich.
+		\item Verwenden stumpfer, beschädigter oder ungeeigneter Fräser, von Fräsern über 16\,mm Durchmesser ohne MAN-Kennzeichnung und von Fräsern, deren Höchstdrehzahl unter der eingestellten Drehzahl liegt.
+		\item Fräserwechsel bei eingestecktem Netzstecker.
+	\end{itemize}
+
+	\section{Arbeiten mit Anschlag und Führung}
+	\label{sec:anschlaege}
+	Gerade Kanten und Nuten gelingen frei Hand kaum. Mit Seitenanschlag oder Führungsschiene läuft die Fräse genau parallel, mit dem Stangenzirkel auf einer Kreisbahn.
+
+	\begin{center}
+		\input{zeichnungen/anschlaege}
+	\end{center}
+
+	\subsection{Seitenanschlag}
+	Für Kanten und Nuten parallel zu einer geraden Werkstückkante:
+	\begin{enumerate}
+		\item Die beiden Führungsstangen am Seitenanschlag festklemmen.
+		\item Die Stangen in die Nuten~\teil{8} des Frästischs schieben, den Abstand a zwischen Kante und Fräser einstellen und die Stangen am Frästisch festklemmen.
+		\item An einem Reststück ausprobieren und den Abstand nachmessen.
+	\end{enumerate}
+	Mit der Feineinstellung (Zubehör) lässt sich der Abstand über eine Stellschraube in kleinen Schritten verändern, ohne die Stangen zu lösen. Beim Fräsen den Anschlag immer an der Kante anliegen lassen. Im Gegenlauf zieht der Fräser den Anschlag von selbst an die Kante.
+
+	\subsection{Führungsschiene}
+	Für gerade Nuten an beliebiger Stelle, auch schräg zur Werkstückkante:
+	\begin{enumerate}
+		\item Den Führungsanschlag mit den Führungsstangen am Frästisch befestigen.
+		\item Die Führungsschiene mit Zwingen auf dem Werkstück festspannen. Zwischen Schienenkante und Nut \textbf{mindestens 5\,mm} Abstand lassen.
+		\item Den Führungsanschlag auf die Schiene setzen. Hat er Spiel, kann ein Betreuer die seitlichen Führungsbacken mit einem Schraubendreher nachstellen.
+		\item Die Schiene ist höher als die Werkstückoberfläche. Damit der Frästisch nicht kippt, die höhenverstellbare Abstützung am Frästisch so einstellen, dass er parallel zum Werkstück steht.
+	\end{enumerate}
+	Wer nach einer Anrisslinie arbeitet, findet die Mitte des Fräsers über die Markierung am Frästisch und die Skala an der Abstützung.
+
+	\subsection{Stangenzirkel}
+	Für Kreise und Kreisbögen mit etwa 15 bis 76\,cm Durchmesser:
+	\begin{enumerate}
+		\item Den Stangenzirkel in die vordere Nut des Frästischs schieben, bis der gewünschte Radius r eingestellt ist, und festklemmen.
+		\item Die Zirkelspitze in den Mittelpunkt setzen.
+		\item Eine Kreisscheibe gegen den Uhrzeigersinn fräsen, ein rundes Loch im Uhrzeigersinn (wie Außen- und Innenkanten).
+	\end{enumerate}
+	Soll im Mittelpunkt keine Kerbe entstehen, ein dünnes Brettchen mit doppelseitigem Klebeband auf den Mittelpunkt kleben und die Spitze dort einsetzen.
+
+	\section{Nach dem Fräsen}
+
+	\begin{itemize}
+		\item Fräse ausschalten, Fräser auslaufen lassen, Netzstecker ziehen.
+		\item Fräse gründlich reinigen und aussaugen, besonders Motorgehäuse und Absauganschluss. Mit Druckluft nur im Freien ausblasen oder die Fräse dabei aus dem Fenster halten.
+		\item Werkstück lösen, Arbeitsplatz und Boden absaugen.
+		\item Fräse, Schlüssel, Fräser, Zubehör und Sauger an ihren Platz zurücklegen.
+		\item Schäden, stumpfe Fräser oder Probleme einem Betreuer melden.
+	\end{itemize}
+
+	\section{Infos für Betreuer}
+
+	\subsection{Typische Fehler}
+	\begin{itemize}
+		\item \textbf{Brandspuren oder geschmolzener Kunststoff:} Drehzahl zu hoch, Vorschub zu langsam oder Fräser stumpf.
+		\item \textbf{Ausgefranste oder ausgerissene Kanten:} im Gleichlauf gefräst, Fräser stumpf oder Drehzahl zu niedrig. Bei Holz Reihenfolge der Kanten beachten.
+		\item \textbf{Fräse zieht weg oder springt:} Gleichlauf oder Werkstück nicht fest gespannt.
+		\item \textbf{Fräse wird langsamer oder schaltet ab:} Überlastung oder Übertemperatur. Weniger Tiefe pro Durchgang, langsamer schieben, Fräse abkühlen lassen.
+		\item \textbf{Absaugung schwach:} Absauganschluss verstopft, Sauger voll oder Filter zugesetzt.
+		\item \textbf{Frästiefe ändert sich während des Fräsens:} Fräser rutscht in der Spannzange. Sofort aufhören, Schaft und Spannzange prüfen, Fräser richtig einstecken und fest anziehen.
+		\item \textbf{Kein Sanftanlauf, Drehzahl nicht regelbar:} Elektronik defekt. Fräse nicht weiter benutzen, kennzeichnen und dem Maschinenverantwortlichen melden.
+	\end{itemize}
+
+	\subsection{Pflege und Prüfung}
+	\begin{itemize}
+		\item Fräse und Motorlüftung regelmäßig von Staub reinigen, nach Aluminium besonders gründlich.
+		\item Spannzange und Spannmutter sauber halten, Harz und Staub entfernen.
+		\item Kabel, Spannzange und Fräser regelmäßig prüfen. Stumpfe oder beschädigte Fräser aussortieren.
+		\item Elektrische Prüfung nach DGUV Vorschrift 3 gemäß Prüffrist.
+		\item Wartung nur durch Betreuer mit gezogenem Netzstecker.
+	\end{itemize}
+
+	\section{Quellen}
+	Die Formulierungen und Zeichnungen dieser Einweisung sind eigenständig erstellt. Die Zeichnungen sind mit TikZ gezeichnet und zeigen die Fräse schematisch. Das Foto in Abschnitt~\ref{sec:bedienelemente} stammt von GoRapid und steht auf \href{https://commons.wikimedia.org/wiki/File:Oberfraese.jpg}{Wikimedia Commons} unter der Lizenz \href{https://creativecommons.org/licenses/by/3.0/}{CC BY 3.0}; es wurde verkleinert und mit Nummern ergänzt. Sachliche Angaben (technische Daten, Drehzahl-Richtwerte, Sicherheitsregeln) beruhen auf der Betriebsanleitung des Herstellers und allgemein bekannten Regeln. Maßgeblich ist die Originalbetriebsanleitung von Festool, die der Maschine beiliegt (Links siehe oben). Festool hat dieses Dokument weder geprüft noch übernimmt es dafür eine Haftung.
+
+	\ccLicense{festool-oberfraese-einweisung}{Einweisung Festool-Oberfräse}
 
 \end{document}

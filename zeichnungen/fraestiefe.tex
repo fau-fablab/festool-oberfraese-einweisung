@@ -1,0 +1,57 @@
+% =====================================================================
+%  Frästiefe einstellen in drei Schritten (schematisch, von vorn).
+%  Selbst gezeichnet, keine Vorlage aus der Herstelleranleitung.
+% =====================================================================
+\begin{tikzpicture}[x=1mm, y=1mm, font=\scriptsize]
+
+  % Oberfräse, Frästisch steht bei y=22 auf dem Werkstück.
+  % \fraese{Mitte x}{Eintauchweg d}{Unterkante Tiefenanschlag}
+  % Bei d=3 berührt der Fräser gerade die Oberfläche.
+  \newcommand{\fraese}[3]{%
+    \begin{scope}[shift={(#1,22)}]
+      % Führungssäulen
+      \draw[metall, fill=black!8] (-11,3) rectangle (-8,47);
+      \draw[metall, fill=black!8] (8,3) rectangle (11,47);
+      % Motor, Spannmutter, Fräser
+      \draw[gehaeuse, rounded corners=3] (-7,16-#2) rectangle (7,46-#2);
+      \draw[metall] (-3,13-#2) rectangle (3,16-#2);
+      \draw[fraeser, fill=black!35] (-1.2,10-#2) rectangle (1.2,13-#2);
+      \draw[fraeser] (-2.5,3-#2) rectangle (2.5,10-#2);
+      % Motorträger mit Halter und Skala
+      \draw[gehaeuse, fill=black!20, rounded corners=1] (-21,28-#2) rectangle (13,38-#2);
+      \foreach \i in {0,...,8}
+        \draw[black!80, line width=0.3pt] (-14.3,29+\i-#2) -- (-13,29+\i-#2);
+      % Frästisch und Revolveranschlag
+      \draw[metall, fill=black!40, rounded corners=0.5] (-23,0) rectangle (-4,3);
+      \draw[metall, fill=black!40, rounded corners=0.5] (4,0) rectangle (23,3);
+      \draw[metall, fill=black!25] (-19,3) rectangle (-13,7);
+      % Tiefenanschlag mit Zeiger
+      \draw[metall, fill=black!10] (-17.5,#3-22) rectangle (-14.5,#3+8);
+      \fill[nokrot] (-14.5,#3-3.7) -- (-12.8,#3-3) -- (-14.5,#3-2.3) -- cycle;
+    \end{scope}}
+
+  % ---------------- 1 Nullpunkt ----------------------------------------
+  \feld{0}{0}{54}{78}{1\quad Nullpunkt}
+  \draw[werkstueck] (3,14) rectangle (51,22);
+  \fraese{27}{3}{29}
+  \node[align=center] at (27,7.5) {Fräser auf das Werkstück absenken,\\Tiefenanschlag aufsetzen,\\Zeiger auf 0 schieben};
+
+  % ---------------- 2 Frästiefe vorgeben -------------------------------
+  \feld{58}{0}{54}{78}{2\quad Frästiefe vorgeben}
+  \draw[werkstueck] (61,14) rectangle (109,22);
+  \fraese{85}{3}{35}
+  \draw[hilfslinie] (63,29) -- (68,29) (63,35) -- (68,35);
+  \draw[mass] (64.5,29) -- (64.5,35);
+  \node[anchor=east] at (64,32) {\textbf{t}};
+  \node[align=center] at (85,7.5) {Tiefenanschlag um die Frästiefe t\\anheben und festklemmen, dann\\Fräse wieder nach oben lassen};
+
+  % ---------------- 3 Eintauchen ---------------------------------------
+  \feld{116}{0}{54}{78}{3\quad Eintauchen}
+  \draw[werkstueck] (119,14) rectangle (167,22);
+  \fill[nut] (140.5,16) rectangle (145.5,22);
+  \fraese{143}{9}{29}
+  \draw[hilfslinie] (146,16) -- (154,16) (166,22) -- (154,22);
+  \draw[mass] (152,16) -- (152,22);
+  \node[anchor=west] at (152.5,19) {\textbf{t}};
+  \node[align=center] at (143,7.5) {Fräse einschalten und eintauchen,\\bis der Tiefenanschlag aufsitzt:\\der Fräser steht t tief im Material};
+\end{tikzpicture}

@@ -6,10 +6,12 @@ Einweisung des [FAU FabLab](https://fablab.fau.de) in die Oberfräse Festool OF 
 Inhalt
 ------
 
-- Technische Daten, allgemeine Sicherheitshinweise, Schutzausrüstung
-- Bestimmungsgemäße Verwendung, Aluminiumbearbeitung
+- Regeln und Sicherheit, Betriebsanweisung BA-OF-01 (Aushang bei der Oberfräse)
+- Bedienelemente (Foto mit Bedienhinweisen), Checkliste, Schutzausrüstung, Material, Absaugung, Werkstück spannen
 - Fräser wechseln, Frästiefe einstellen, Drehzahl wählen
-- Arbeiten mit der Maschine: Festspannen, Gegenlauf, Anschläge und Führungen
+- Fräsen Schritt für Schritt, Gegenlauf, Aluminium, Verbotsliste
+- Seitenanschlag, Führungsschiene, Stangenzirkel
+- Infos für Betreuer: typische Fehler, Pflege und Prüfung
 
 Download
 --------
@@ -18,6 +20,7 @@ Die neueste Version aus [GitHub](https://github.com/fau-fablab/festool-oberfraes
 
 - [Einweisung](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/einweisung_Oberfraese.pdf)
 - [Einweisungsliste](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/Einweisungsliste_Oberfraese.pdf)
+- [Betriebsanweisung](https://brain.fablab.fau.de/build/festool-oberfraese-einweisung/Betriebsanweisung_Oberfraese.pdf) (Aushang bei der Oberfräse)
 
 Außerdem baut eine GitHub Action die PDFs bei jedem Push. Auf dem Hauptbranch entsteht dabei ein
 [Release](https://github.com/fau-fablab/festool-oberfraese-einweisung/releases) mit Datums-Version (`vJJJJ.MM.TT`) und den PDFs.
@@ -45,4 +48,13 @@ Technische Details zum Buildserver: [fau-fablab/buildserver](https://github.com/
 Lizenz
 ------
 
-**Noch ungeklärt:** Die Einweisung enthält Texte und Abbildungen aus der Betriebsanleitung von Festool, deren Rechte bei Festool liegen.
+[![Lizenz: CC BY-SA 3.0](https://licensebuttons.net/l/by-sa/3.0/de/88x31.png)</br>CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
+
+Die Einweisung und die Betriebsanweisung (`betriebsanweisung/ba_oberfraese.tex`, BA-OF-01) sind selbst
+formuliert und enthalten keine Texte oder Abbildungen aus der Festool-Betriebsanleitung. Alle Zeichnungen
+in `zeichnungen/` sind selbst mit TikZ erstellt; Symbole nur nach ISO 7010 aus `fablab-document`.
+Ausnahme: Das Foto `bilder/oberfraese-of1010ebq.jpg` stammt von GoRapid (Wikimedia Commons) und steht
+unter CC BY 3.0, siehe [bilder/QUELLEN.md](bilder/QUELLEN.md).
+Für Details wird auf die Originalanleitung von Festool verwiesen. **Beim Bearbeiten nichts aus der
+Festool-Anleitung übernehmen, auch nicht sinngemäß Satz für Satz.** Bilder bitte selbst zeichnen
+oder fotografieren.
