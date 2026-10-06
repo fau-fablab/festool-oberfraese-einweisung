@@ -24,8 +24,8 @@
 \renewcommand{\texteuro}{\euro}
 % Nummer eines Bedienelements wie in der Übersicht, z.B. \teil{3}
 \newcommand{\teil}[1]{\tikz[baseline=(n.base)]\node[marke, minimum size=3.8mm, font=\tiny\bfseries](n){#1};}
-% Farbe eines Bedienelements mit Farbfeld, z.B. \farbe{bediengruen}{grün}
-\newcommand{\farbe}[2]{\tikz[baseline=-0.6ex]\draw[fill=#1, draw=black!60] (0,-1.1mm) rectangle (2.2mm,1.1mm);~#2}
+% Farbe eines Bedienelements mit Farbfeld, Wort in etwas dunklerer Farbe (lesbar), z.B. \farbe{bediengruen}{grün}
+\newcommand{\farbe}[2]{{\colorlet{farbefeld}{#1}\tikz[baseline=-0.6ex]\draw[fill=farbefeld, draw=black!60] (0,-1.1mm) rectangle (2.2mm,1.1mm);~\textcolor{farbefeld!70!black}{#2}}}
 
 \date{\today}
 % Versionsnummer: version.tex wird von der GitHub Action erzeugt,
